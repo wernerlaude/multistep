@@ -1,0 +1,180 @@
+<!-- app/views/survey_responses/new.html.erb -->
+<div data-controller="survey">
+  <div class="progress-container">
+    <div class="progress-bar" data-survey-target="progressBar"></div>
+  </div>
+  <div class="step-indicator" data-survey-target="stepIndicator"></div>
+
+  <div data-survey-target="step" data-step="1">
+    <h2>Was beschreibt dein Unternehmen am besten?</h2>
+    <div class="options-grid">
+      <% {
+           'Gesundheitspraxis' => 'gesundheitspraxis',
+           'Bürodienstleistungen' => ' buero',
+           'Gastronomie' => 'gastronomie',
+           'Handwerksbetrieb' => 'handwerk',
+           'Coaching/Seminare' => 'beratung',
+           'Handel' => 'handel',
+           'Wellness' => 'wellness',
+           'Dienstleistungen' => 'dienstleistungen',
+           'Immobilien' => 'immobilien',
+           'Kreativwirtschaft' => 'kreativwirtschaft',
+           'Bildung & Unterricht' => 'bildung',
+           'Events & Veranstaltungen' => 'events',
+           'Tiere & Tierpflege' => 'tiere',
+            'Andere' => 'andere'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#select"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+  <div data-survey-target="step" data-step="2" hidden>
+    <h2>Was ist das Hauptziel deiner Website?</h2>
+    <div class="options-grid">
+      <% {
+           'Unternehmensdarstellung' => 'unternehmen',
+           'Kunden gewinnen / Leads' => 'leads',
+           'Online-Shop' => 'shop',
+           'Portfolio / Referenzen' => 'portfolio',
+           'Online-Buchungen' => 'buchung',
+           'Blog / Content' => 'blog'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#select"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#back">Zurück</button>
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+  <div data-survey-target="step" data-step="3" hidden>
+    <h2>Wen möchtest du mit deiner Website erreichen?</h2>
+    <div class="options-grid">
+      <% {
+           'Geschäftskunden (B2B)' => 'b2b',
+           'Privatkunden (B2C)' => 'b2c',
+           'Lokale Kunden' => 'lokal',
+           'Deutschlandweit' => 'national',
+           'International' => 'international'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#select"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#back">Zurück</button>
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+  <div data-survey-target="step" data-step="4" hidden>
+    <h2>Was brauchst du konkret?</h2>
+    <div class="options-grid">
+      <% {
+           'Komplett neue Website' => 'neu',
+           'Bestehende Website überarbeiten' => 'redesign',
+           'Kleinere Anpassungen' => 'update'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#select"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#back">Zurück</button>
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+  <div data-survey-target="step" data-step="5" hidden>
+    <h2>Welches Budget planst du für das Projekt?</h2>
+    <div class="options-grid">
+      <% {
+           'Unter 1.000 €' => 'unter1000',
+           '1.000 € – 3.000 €' => 'range_1000_3000',
+           '3.000 € – 7.000 €' => 'range_3000_7000',
+           '7.000 € – 15.000 €' => 'range_7000_15000',
+           'Über 15.000 €' => 'ueber15000'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#select"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#back">Zurück</button>
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+  <div data-survey-target="step" data-step="6" hidden>
+    <h2>Welche Funktionen soll deine Website enthalten?</h2>
+    <div class="options-grid">
+      <% {
+           'Kontaktformular' => 'kontakt',
+           'Online-Buchung' => 'buchung',
+           'Online-Shop' => 'shop',
+           'Blog / News' => 'blog',
+           'Mehrsprachig' => 'mehrsprachig',
+           'SEO-Optimierung' => 'seo'
+         }.each do |label, value| %>
+        <div
+          class="option-tile"
+          data-action="click->survey#toggleMulti"
+          data-value="<%= value %>">
+          <%= label %>
+        </div>
+      <% end %>
+    </div>
+
+    <button data-action="survey#back">Zurück</button>
+    <button data-action="survey#next" data-survey-target="nextButton" disabled>Weiter</button>
+  </div>
+
+
+  <div data-survey-target="step" data-step="7" hidden>
+    <h2>Deine Daten</h2>
+
+    <%= form_with model: @survey_response, url: survey_responses_path, method: :post,
+                  data: { controller: "form", action: "submit->form#validate" } do |f| %>
+
+      <%= f.hidden_field :step1, id: "step1_input" %>
+      <%= f.hidden_field :step2, id: "step2_input" %>
+      <%= f.hidden_field :step3, id: "step3_input" %>
+      <%= f.hidden_field :step4, id: "step4_input" %>
+      <%= f.hidden_field :step5, id: "step5_input" %>
+      <%= f.hidden_field :step6, id: "step6_input" %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, data: { form_target: "name", action: "input->form#validateField" } %>
+      <div data-form-target="nameError" class="error-message"></div><br>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, data: { form_target: "email", action: "input->form#validateField" } %>
+      <div data-form-target="emailError" class="error-message"></div><br>
+
+      <%= f.submit "Absenden", data: { form_target: "submit" } %>
+    <% end %>
+  </div>
+</div>
+

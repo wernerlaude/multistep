@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  step1: MyString
+  step2: MyString
+  step3: MyString
+  step4: MyString
+  name: MyString
+  email: MyString
+
+two:
+  step1: MyString
+  step2: MyString
+  step3: MyString
+  step4: MyString
+  name: MyString
+  email: MyString

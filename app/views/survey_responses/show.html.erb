@@ -1,0 +1,11 @@
+<h1>Dein Ergebnis</h1>
+
+<p><strong>Schritt 1:</strong> <%= @survey_response.step1 %></p>
+<p><strong>Schritt 2:</strong> <%= @survey_response.step2 %></p>
+<p><strong>Schritt 3:</strong> <%= @survey_response.step3 %></p>
+<p><strong>Schritt 4:</strong> <%= @survey_response.step4 %></p>
+
+<hr>
+<p><strong>Name:</strong> <%= @survey_response.name %></p>
+<p><strong>Email:</strong> <%= @survey_response.email %></p>
+<%= link_to "Zurück zur Startseite", root_path, class: "btn" %>
